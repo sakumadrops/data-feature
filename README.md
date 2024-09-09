@@ -1,6 +1,9 @@
 # Explicit Song Checker
 This python script retrieves the lyrics of a song and checks if there is profanity. It uses the Lyrics.ovh API to retrieve the lyrics and the PurgoMalum API to check for profanity.
 
+# Purpose
+If you haven't heard a song for the first time, you may not know whether it is explicit. This could be bad if you're playing a new playlist in front of a class or driving down the road with your strict parents! This script helps you quickly check a song for profanity.
+
 # Features
 
 - Searches up the lyrics of a song with the [Lyrics.ovh](http://Lyrics.ovh) API
