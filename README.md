@@ -6,14 +6,14 @@ If you haven't heard a song for the first time, you may not know whether it is e
 
 # Features
 
-- Searches up the lyrics of a song with the [Lyrics.ovh](http://Lyrics.ovh) API
+- Searches up the lyrics of a song with the Lyrics.ovh API
 - Then the PurgoMalum API checks for any profanity within the lyrics
 - Indicates if there is profanity in a song or not
 
 # APIs Used:
 
-- [Lyrics.ovh](http://Lyrics.ovh) API - https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search
-- PurgoMalum API Profanity Check feature - https://www.purgomalum.com/index.html
+- Lyrics.ovh API - https://lyricsovh.docs.apiary.io/#reference/0/lyrics-of-a-song/search
+- PurgoMalum API Profanity Check Feature - https://www.purgomalum.com/index.html
 
 # Instructions:
 
@@ -23,14 +23,32 @@ If you haven't heard a song for the first time, you may not know whether it is e
 
 # Code Explanation:
 
-### `getLyrics(artist, title)`
+```python
+def getLyrics(artist, title):
+  url = f"https://api.lyrics.ovh/v1/{artist}/{title}"
+  response = requests.get(url) 
+  if response.status_code == 200:
+    data = response.json()
+    lyrics = data['lyrics']
+    return lyrics
+  else: 
+    return "No Lyrics Found"
+```
 
 This function retrieves the lyrics for the specified song using the Lyrics.ovh API.
 
 - **Parameters**: `artist` (str), `title` (str)
 - **Returns**: Lyrics as a string if found, or `"No Lyrics Found"` if the song does not exist
 
-### `containsProfanity(lyrics)`
+```python
+def containsProfanity(lyrics):
+  url = f"https://www.purgomalum.com/service/containsprofanity?text={lyrics}"
+  r = requests.get(url)
+  if r.status_code == 200:
+    return r.text 
+  else:
+    return "Cant Check"
+```
 
 This function checks if the provided lyrics contain profanity using the Purgomalum API.
 
